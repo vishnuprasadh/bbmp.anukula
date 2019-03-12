@@ -1,0 +1,15 @@
+db.country.insert({
+"countryCode":"IN", 
+"countryName":"India",
+"states":
+[{"stateCode":"Kar", 
+"stateName":"Karnataka",
+"cities":
+[
+{"cityCode":"BLR": "cityName:"Bengaluru" }
+]
+},
+]
+	
+
+});

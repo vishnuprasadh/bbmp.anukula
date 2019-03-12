@@ -1,0 +1,185 @@
+[
+  {
+    "_id": null,
+    "currentState": null,
+    "futureState": null,
+    "lcurrentState": [
+      "Earthen"
+    ],
+    "rcurrentState": [
+      "Earthen"
+    ],
+    "lfutureState": [
+      "Concrete"
+    ],
+    "rfutureState": [
+      "Concrete"
+    ],
+    "reportedBy": "Vishnu",
+    "comments": "This is footpath sample",
+    "reportedOn": "2019-03-10 09:04:02.962",
+    "mapurl": null,
+    "geometry": null,
+    "media": null,
+    "roadID": "W101"
+  },
+  {
+    "_id": null,
+    "currentState": null,
+    "futureState": null,
+    "lcurrentState": [
+      "Slab/SS"
+    ],
+    "rcurrentState": [
+      "Slab/SS"
+    ],
+    "lfutureState": [
+      "Preventive Maintenance"
+    ],
+    "rfutureState": [
+      "Preventive Maintenance"
+    ],
+    "reportedBy": "Vishnu",
+    "comments": "This is drain sample, need preventive mnce only",
+    "reportedOn": "2019-03-10 09:04:03.046",
+    "mapurl": null,
+    "geometry": null,
+    "media": null,
+    "roadID": "W101"
+  },
+  {
+    "_id": null,
+    "currentState": [
+      "1"
+    ],
+    "futureState": [
+      "2"
+    ],
+    "lcurrentState": null,
+    "rcurrentState": null,
+    "lfutureState": null,
+    "rfutureState": null,
+    "reportedBy": "Vishnu",
+    "comments": "This is sample for culverts",
+    "reportedOn": "2019-03-10 09:04:03.051",
+    "mapurl": null,
+    "geometry": null,
+    "media": [
+      {
+        "video1": "https://img.com/abc.mp4",
+        "image1": "https://img.com/abc.jpg"
+      },
+      {}
+    ],
+    "roadID": "W101"
+  },
+  {
+    "length": "100",
+    "width": "200.939",
+    "unit": "mtr",
+    "streetType": "Intermediary",
+    "attributes": [
+      {
+        "traffic": "Critical",
+        "pcupeak": "300000"
+      }
+    ],
+    "streetName": "1st cross",
+    "_id": null,
+    "roadId": "W101",
+    "wardCode": "BELL",
+    "reportedBy": "Vishnu",
+    "comments": "This is sample for roads",
+    "reportedOn": "2019-03-10 09:04:03.061",
+    "geometry": null,
+    "media": null,
+    "mapUrl": null
+  },
+  {
+    "_id": null,
+    "currentPoles": 5,
+    "currentLights": 5,
+    "polesNeed": 2,
+    "lightsetNeed": 3,
+    "repairLight": 1,
+    "reportedBy": "Vishnu",
+    "comments": "This is sample for streetlights, need new lights and repair works",
+    "reportedOn": "2019-03-10 09:04:03.067",
+    "mapURL": null,
+    "geometry": null,
+    "media": null,
+    "roadID": "W101"
+  },
+  {
+    "_id": null,
+    "currentState": [
+      "Earthen"
+    ],
+    "futureState": [
+      "Concrete"
+    ],
+    "lcurrentState": null,
+    "rcurrentState": null,
+    "lfutureState": null,
+    "rfutureState": null,
+    "reportedBy": "Vishnu",
+    "comments": "This is road state sample",
+    "reportedOn": "2019-03-10 09:04:04.403",
+    "mapurl": null,
+    "geometry": null,
+    "media": null,
+    "roadID": "W101"
+  },
+  {
+  "_id":null,
+  "issueId":"0200202",
+  "complaintDate":"03/03/2018",
+  "location":"Kasavanahalli",
+  "typeofComplaint":"Drain issue",
+  "category":"drains",
+  "wardCode":"BELL",
+  "status":"New",
+  "priority":"High"
+},
+{
+  "_id":null,
+  "issueId":"5c866efedfb9654a5da8813f",
+  "statusComments":"This is status report for issue history",
+  "actionTaken":"Drain has a problem with the slab which is reported for fix",
+  "siteReport":"We will fix this in next inspection",
+  "dateUpdated":"08/03/2019",
+  "status":"In Progress"
+},
+{
+  "_id":null,
+  "issueId":"5c866efedfb9654a5da8813f",
+  "statusComments":"This is status report for issue history",
+  "actionTaken":"Drain problem is fixed now",
+  "siteReport":"All looks ok",
+  "dateUpdated":"20/03/2019",
+  "status":"Closed"
+},
+{
+	"_id":"5c8668c3dfb965493b5f1fc5",
+	"length" : "900.2",
+	"width" : "40.3",
+	"unit" : "mtr",
+	"streetType" : "Major Roads",
+	"attributes" : [
+		{
+			"traffic" : "Critical",
+			"pcupeak" : "220000"
+		}
+	],
+	"streetName" : "Kasavaqnahalli Road",
+	"roadId" : "W101",
+	"wardCode" : "BELL",
+	"reportedBy" : "Vishnu",
+	"comments" : "This is sample for roads",
+	"reportedOn" : "2019-03-10 09:04:03.061"
+	
+}
+
+  
+  
+]

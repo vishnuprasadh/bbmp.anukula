@@ -1,0 +1,809 @@
+db.countries.insert(
+[
+  {
+    "countryCode": "IN",
+    "countryName": "India",
+    "states": [
+      {
+        "stateCode": "Kar",
+        "stateName": "Karnataka",
+        "cities": [
+          {
+            "cityCode": "BLR",
+            "cityName": "Bengaluru"
+          },
+          {
+            "cityCode": "MYS",
+            "cityName": "Mysore"
+          },
+          {
+            "cityCode": "HAS",
+            "cityName": "Hassan"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "countryCode": "US",
+    "countryName": "USA",
+    "states": [
+      {
+        "stateCode": "CAL",
+        "stateName": "CALIFORNIA",
+        "cities": [
+          {
+            "cityCode": "MJV",
+            "cityName": "Mission Viejo"
+          },
+          {
+            "cityCode": "SJO",
+            "cityName": "San Jose"
+          },
+          {
+            "cityCode": "LAS",
+            "cityName": "Los Angeles"
+          }
+        ]
+      }
+    ]
+  }
+]
+
+);
+
+
+db.wardIssue.insert(
+	[
+		{
+			"issueId":"1",
+			"wardCode":"BELL",
+			"complaintSource":"HO",
+			"complaintDate": "2019-02-14",
+			"location": "Kasavanahalli",
+			"typeofComplaint":"Corporator",
+			"category":"Roads",
+			"status":"New",
+			"history":
+			[
+			{	
+				"actionTaken":"Visited site",
+				"siteReport":"We visited and didnt see any issue",
+				"statusComments":"We close this",
+				"dateUpdated":"2019-02-14"
+				}
+			]
+		}	
+	]
+
+);
+
+/*
+_id = 	"_id":"5c62e463f38ccb83d8fde572"
+
+{
+  "Status" : [
+		{
+			"currentState" : [
+				"Concrete"
+			],
+			"futureState" : [
+				"None"
+			],
+			"reportedby" : "Vishnu",
+			"reportedOn" : "12/10/2018",
+			"comments" : "",
+			"mapurl" : [
+				{
+					"key" : "",
+					"value" : ""
+				}
+			],
+			"geometry" : [
+				{
+					"key" : "",
+					"value" : ""
+				}
+			],
+			"media" : [
+				{
+					"key" : "",
+					"value" : ""
+				}
+			]
+		}
+	]
+}
+*/
+
+/*
+_id = 
+
+{	"wardCode" : "BELL",
+	"roadId" : "W103",
+	"streetName" : "",
+	"streetType" : "Major",
+	"length" : 890,
+	"width" : 30,
+	"unit" : "feet",
+	"attributes" : [
+		{
+			"key" : "contractor",
+			"value" : "pwd"
+		}
+	]
+	}
+
+"drain": [
+            {
+                "lcurrentState": [
+                    "None"
+                ],
+                "rcurrentState": [
+                    "None"
+                ],
+                "lfutureState": [
+                    "Concrete"
+                ],
+                "rfutureState": [
+                    "Concrete"
+                ],
+                "reportedBy": null,
+                "comments": "",
+                "reportedOn": "",
+                "mapurl": [
+                    {
+                        "value": "https://maps.url.com",
+                        "key": "map1"
+                    }
+                ],
+                "geometry": [
+                    {
+                        "value": "",
+                        "key": ""
+                    }
+                ],
+                "media": [
+                    {
+                        "value": "",
+                        "key": ""
+                    }
+                ]
+            }
+        ]
+
+"footpaths": [
+            {
+                "lcurrentState": [
+                    "Earthen"
+                ],
+                "rcurrentState": [
+                    "Earthen"
+                ],
+                "lfutureState": [
+                    "Concrete"
+                ],
+                "rfutureState": [
+                    "Concrete"
+                ],
+                "reportedBy": Vishnu,
+                "comments": "Very bad state",
+                "reportedOn": "",
+                "mapurl": [x
+                    {
+                        "value": "",
+                        "key": ""
+                    }
+                ],
+                "geometry": [
+                    {
+                        "value": "",
+                        "key": ""
+                    }
+                ],
+                "media": [
+                    {
+                        "value": "",
+                        "key": ""
+                    }
+                ]
+            }
+        ]
+        
+
+ "streetLights": [
+            {
+                "currentPoles": 1,
+                "currentLights": 1,
+                "polesNeed": 2,
+                "lightsetNeed": 2,
+                "repairLight": 0,
+                "reportedBy": null,
+                "comments": "",
+                "reportedOn": "",
+                "mapURL": null,
+                "geometry": [
+                    {
+                        "value": "",
+                        "key": ""
+                    }
+                ],
+                "media": [
+                    {
+                        "value": "",
+                        "key": ""
+                    }
+                ]
+            }
+        ]
+        
+        "culverts": [
+            {
+                "currentState": [
+                    "5"
+                ],
+                "futureState": null,
+                "lcurrentState": null,
+                "rcurrentState": null,
+                "lfutureState": null,
+                "rfutureState": null,
+                "reportedBy": null,
+                "comments": "",
+                "reportedOn": "",
+                "mapurl": [
+                    {
+                        "value": "",
+                        "key": ""
+                    }
+                ],
+                "geometry": [
+                    {
+                        "value": "",
+                        "key": ""
+                    }
+                ],
+                "media": [
+                    {
+                        "value": "",
+                        "key": ""
+                    }
+                ]
+            }
+        ]
+
+
+*/
+	
+	
+	
+	
+
+db.zones.insert(
+[
+  {
+    "cityCode": "BLR",
+    "zoneCode": "MAH",
+    "zoneName": "Mahadevapura",
+    "population": 500000,
+    "area": 100,
+    "unit": "sqkm",
+    "wards": [
+      {
+        "wardCode": "150",
+        "wardName": "Bellandur",
+        "population": 200000,
+        "area": "26.4",
+        "unit": "sqkm"
+      }
+    ]
+  },
+  {
+    "cityCode": "BLR",
+    "zoneCode": "RRN",
+    "zoneName": "RajarajeshwariNagar",
+    "population": 200000,
+    "area": 40,
+    "unit": "sqkm",
+    "wards": []
+  }
+]
+);
+
+
+//db.zones.find({$and:[{"wards.wardCode":"150"},{"cityCode":"BLR"}]});;
+//db.countries.find({$and:[{"states.cities.cityCode":"BLR"},{"countryCode":"IN"}]});
+/*db.roads.aggregate([
+		{
+		$lookup:
+		{
+		from:"zones",
+		localField:"wardCode",
+		foreignField:"wards.wardCode",
+		as:"roadbyzone"
+		}}
+		
+	]).pretty();
+*/
+
+
+db.roads.insert(
+[   { "wardCode": "BELL",
+      "roadId": "W101",
+      "streetName": "",
+      "streetType": "Intermediary",
+      "length": 500000,
+      "width": 30,
+      "unit": "mtr",
+      "attributes": [
+        {
+          "key": "",
+          "value": ""
+        }
+      ],
+      "roadstate": [
+        {
+          "currentState": [
+            "Earthen"
+          ],
+          "futureState": [
+            "Concrete"
+          ],
+          "reportedby": "",
+          "reportedOn": "",
+          "comments": "",
+          "mapurl": [ {
+              "key": "",
+              "value": ""
+            }],
+          "geometry": [ {
+              "key": "",
+              "value": ""
+            }],
+          "media": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "drain": [
+        {
+          "lcurrentState": [
+            "Earthen"
+          ],
+          "lfutureState": [
+            "Concrete"
+          ],
+          "rcurrentState": [
+            "Earthen"
+          ],
+          "rfutureState": [
+            "Concrete"
+          ],
+          "reportedby": "",
+          "reportedOn": "",
+          "comments": "",
+          "mapurl": [ {
+              "key": "",
+              "value": ""
+            }],
+          "geometry": [ {
+              "key": "",
+              "value": ""
+            }],
+          "media": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "footpaths": [
+        {
+          "lcurrentState": [
+            "Earthen"
+          ],
+          "lfutureState": [
+            "Concrete"
+          ],
+          "rcurrentState": [
+            "Earthen"
+          ],
+          "rfutureState": [
+            "Concrete"
+          ],
+          "reportedby": "",
+          "reportedOn": "",
+          "comments": "",
+          "mapurl": [ {
+              "key": "",
+              "value": ""
+            }],
+          "geometry": [ {
+              "key": "",
+              "value": ""
+            }],
+          "media": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "culverts": [
+        {
+          "currentState": "1",
+          "currentState": "5",
+          "reportedby": "",
+          "reportedOn": "",
+          "comments": "",
+          "mapurl": [{
+              "key": "",
+              "value": ""
+            }],
+          "geometry": [{
+              "key": "",
+              "value": ""
+            }],
+          "media": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "streetLights": [
+        {
+          "currentPoles": 1,
+          "currentLights": 1,
+          "polesNeed": 2,
+          "lightsetNeed": 2,
+          "repairLight": 0,
+          "reportedOn": "",
+          "comments": "",
+          "mapurl": [ {
+              "key": "",
+              "value": ""
+            }],
+          "geometry": [ {
+              "key": "",
+              "value": ""
+            }],
+          "media": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ]
+        }
+      ]
+    },
+    
+    { "wardCode": "BELL",
+      "roadId": "W102",
+      "streetName": "",
+      "streetType": "Intermediary",
+      "length": 1020,
+      "width": 80,
+      "unit": "mtr",
+      "attributes": [
+        {
+          "key": "",
+          "value": ""
+        }
+      ],
+      "roadstate": [
+        {
+          "currentState": [
+            "Earthen"
+          ],
+          "futureState": [
+            "Concrete"
+          ],
+          "reportedby": "",
+          "reportedOn": "",
+          "comments": "",
+          "mapurl": [ {
+              "key": "",
+              "value": ""
+            }],
+          "geometry": [ {
+              "key": "",
+              "value": ""
+            }],
+          "media": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "drain": [
+        {
+          "lcurrentState": [
+            "Earthen"
+          ],
+          "lfutureState": [
+            "Concrete"
+          ],
+          "rcurrentState": [
+            "Earthen"
+          ],
+          "rfutureState": [
+            "Concrete"
+          ],
+          "reportedby": "",
+          "reportedOn": "",
+          "comments": "",
+          "mapurl": [{
+              "key": "",
+              "value": ""
+            }],
+          "geometry": [{
+              "key": "",
+              "value": ""
+            }],
+          "media": [
+            {
+              "type": "",
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "footpaths": [
+        {
+          "lcurrentState": [
+            "Earthen"
+          ],
+          "lfutureState": [
+            "Concrete"
+          ],
+          "rcurrentState": [
+            "Earthen"
+          ],
+          "rfutureState": [
+            "Concrete"
+          ],
+          "reportedby": "",
+          "reportedOn": "",
+          "comments": "",
+          "mapurl": [ {
+              "key": "",
+              "value": ""
+            }],
+          "geometry": [ {
+              "key": "",
+              "value": ""
+            }],
+          "media": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "culverts": [
+        {
+          "currentState": "1",
+          "futureState": "2",
+          "reportedby": "",
+          "reportedOn": "",
+          "comments": "",
+          "mapurl": [ {
+              "key": "",
+              "value": ""
+            }],
+          "geometry": [ {
+              "key": "",
+              "value": ""
+            }],
+          "media": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "streetLights": [
+        {
+          "currentPoles": 1,
+          "currentLights": 1,
+          "polesNeed": 2,
+          "lightsetNeed": 2,
+          "repairLight": 0,
+          "reportedOn": "",
+          "comments": "",
+          "mapurl": [ {
+              "key": "",
+              "value": ""
+            }],
+          "geometry": [ {
+              "key": "",
+              "value": ""
+            }],
+          "media": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ]
+        }
+      ]
+    }
+    
+    
+    
+  ]
+);
+
+
+
+------
+-----
+db.roads.insert(
+[   { "wardCode": "BELL",
+      "roadId": "W101",
+      "streetName": "",
+      "streetType": "Intermediary",
+      "length": 500000,
+      "width": 30,
+      "unit": "mtr",
+      "attributes": [
+        {
+          "key": "",
+          "value": ""
+        }
+      ],
+      "roadstate": [
+        {
+          "currentState": [
+            "Earthen"
+          ],
+          "futureState": [
+            "Concrete"
+          ],
+          "reportedby": "",
+          "reportedOn": "",
+          "comments": "",
+          "mapurl": [ {
+              "key": "",
+              "value": ""
+            }],
+          "geometry": [ {
+              "key": "",
+              "value": ""
+            }],
+          "media": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "drain": [
+        {
+          "lcurrentState": [
+            "Earthen"
+          ],
+          "lfutureState": [
+            "Concrete"
+          ],
+          "rcurrentState": [
+            "Earthen"
+          ],
+          "rfutureState": [
+            "Concrete"
+          ],
+          "reportedby": "",
+          "reportedOn": "",
+          "comments": "",
+          "mapurl": [ {
+              "key": "",
+              "value": ""
+            }],
+          "geometry": [ {
+              "key": "",
+              "value": ""
+            }],
+          "media": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "footpaths": [
+        {
+          "lcurrentState": [
+            "Earthen"
+          ],
+          "lfutureState": [
+            "Concrete"
+          ],
+          "rcurrentState": [
+            "Earthen"
+          ],
+          "rfutureState": [
+            "Concrete"
+          ],
+          "reportedby": "",
+          "reportedOn": "",
+          "comments": "",
+          "mapurl": [ {
+              "key": "",
+              "value": ""
+            }],
+          "geometry": [ {
+              "key": "",
+              "value": ""
+            }],
+          "media": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "culverts": [
+        {
+          "currentState": "1",
+          "futureState": "5",
+          "reportedby": "",
+          "reportedOn": "",
+          "comments": "",
+          "mapurl": [{
+              "key": "",
+              "value": ""
+            }],
+          "geometry": [{
+              "key": "",
+              "value": ""
+            }],
+          "media": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ]
+        }
+      ],
+      "streetLights": [
+        {
+          "currentPoles": 1,
+          "currentLights": 1,
+          "polesNeed": 2,
+          "lightsetNeed": 2,
+          "repairLight": 0,
+          "reportedOn": "",
+          "comments": "",
+          "mapurl": [ {
+              "key": "",
+              "value": ""
+            }],
+          "geometry": [ {
+              "key": "",
+              "value": ""
+            }],
+          "media": [
+            {
+              "key": "",
+              "value": ""
+            }
+          ]
+        }
+      ]
+    }
+);
+
+
