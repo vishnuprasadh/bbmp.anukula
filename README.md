@@ -14,3 +14,21 @@ The following URL has a sample payload for request and response for various API 
   - Add or Update action taken or site visit on a wardIssue using IssueHistory
   - Get history of site visits and ation taken on a issue
   
+## Roads API
+TBD
+
+## RoadState API
+TBD
+
+## Drains API
+TBD
+
+## Footpath API
+TBD
+
+## StreetLights API
+TBD
+
+## Culverts API
+TBD
+
