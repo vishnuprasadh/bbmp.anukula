@@ -13,3 +13,133 @@ db.country.insert({
 	
 
 });
+
+//Group by query
+db.wardIssue.group({key:{location:1,status:1,priority:1}, cond:{status:{$ne:"Closeds"}},reduce:function(curr,result){}, initial:{}});
+
+
+db.wardIssue.group(
+{key:{location:1,status:1,priority:1},
+cond:{status:{$ne:"Closeds"}},
+reduce:function(curr,result)
+	{
+		result.total ++;
+		result.count++;
+	}, 
+initial:{
+total:0,count:0},
+finalize:function(result)
+	{
+		result.total += result.count;
+	}
+});
+
+
+db.wardIssue.group(
+{key:{location:1},
+cond:{status:{$ne:"Closed"}},
+reduce:function(curr,result)
+	{
+		result.total ++;
+		result.count++;
+	}, 
+initial:{
+total:0,count:0}
+});
+
+db.wardIssue.group(
+{key:{location:1,status:1},
+cond:{status:{$ne:"Closed"}},
+reduce:function(curr,result)
+	{
+		result.total ++;
+		result.count++;
+	}, 
+initial:{
+total:0,count:0}
+});
+
+
+db.wardIssue.aggregate(
+[{$match:{status:[$ne:"Closed"]}},
+{$group:{_id: {_id:"$location"},count:{$sum:1}}}],
+);
+ 
+db.wardIssue.aggregate(
+[
+{
+	$project:{status: {$ne:["$status","Closed"]}}
+}
+]
+);
+
+db.wardIssue.aggregate(
+[
+{
+	$match:{status:{$ne:"Closed"}}
+},
+{
+	$facet:{
+	"bylocation":[
+			{$unwind:"$location"},{$sortByCount:"$location"}],
+	"bystatus":[
+			{$group:{"_id":{"location":"$location", "status":"$status"},"count":{"$sum":1}}}],
+	}
+}]); 
+
+
+db.wardIssue.aggregate(
+[
+{
+	$match:{status:{$ne:"Closed"}}
+},
+{
+	$facet:{
+	"bylocation":[
+			{$unwind:"$location"},{$sortByCount:"$location"}],
+	"bypriority":[
+			{$group:{"_id":{"location":"$location", "priority":"$priority"},"count":{$sum":1}}}]
+	}
+}
+]
+); 
+
+
+
+
+
+ 
+db.wardIssue.aggregate(
+ [{$project:{location:1,status:1}}]);
+
+
+db.wardIssue.aggregate(
+{$group:{_id:{_id:[{$project:{location:1,status:1}}]},count:{$sum:1}});
+
+db.wardIssue.aggregate(
+{$project:{location:1,status:1}},
+{$group:{location:{location:"$location"},count:{$sum:1}}}
+);
+
+
+db.wardIssue.aggregate(
+ [
+ {
+ $match:{status:{$ne:"Closed"}}
+ },
+  {
+ $facet:{
+ "bylocation":[
+ 	{$unwind:"$location"},{$sortByCount:"$location"}],
+ "bypriority":[
+	{$group:{"_id":{"location":"$location","priority":"$priority"},"count":{"$sum":1}}}
+	{$sort
+	],
+ "bystatus":[
+    {$group:{"_id":{"location":"$location","status":"$status"},"count":{"$sum":1}}}]
+}}
+]);
+
+
+
+

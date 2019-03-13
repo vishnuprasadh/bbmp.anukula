@@ -13,9 +13,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.cognitive.bbmp.anukula.domain.Culverts;
 import com.cognitive.bbmp.anukula.domain.Drains;
 import com.cognitive.bbmp.anukula.domain.FootPaths;
+import com.cognitive.bbmp.anukula.domain.IssueSnapshot;
 import com.cognitive.bbmp.anukula.domain.RoadState;
 import com.cognitive.bbmp.anukula.domain.Roads;
 import com.cognitive.bbmp.anukula.domain.StreetLights;
+import com.cognitive.bbmp.anukula.domain.groupByEntity;
+import com.cognitive.bbmp.anukula.domain.groupByEntityContainer;
+import com.cognitive.bbmp.anukula.domain.groupByLocation;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -32,6 +36,66 @@ import io.restassured.specification.RequestSpecification;
 public class ApplicationTests {
 
 	String BASEURL = "http://localhost:8080/";
+	
+	@Test
+	public void createIssueSnapshot() throws JsonProcessingException {
+		
+		IssueSnapshot snapshot = new IssueSnapshot();
+		List<groupByLocation> locationList = new ArrayList<groupByLocation>();
+		
+		locationList.add(new groupByLocation("5","Kasavanahalli"));
+		locationList.add(new groupByLocation("4","Junnasandra"));
+		locationList.add(new groupByLocation("6","Kaikondrahalli"));
+		locationList.add(new groupByLocation("3","Doddakanneli"));
+		locationList.add(new groupByLocation("4","Haralur"));
+		snapshot.setBylocation(locationList);
+		
+		List<groupByEntityContainer> statusList = new ArrayList<groupByEntityContainer>();
+		statusList.add(new groupByEntityContainer(new groupByEntity("Kasavanahalli", "New",null) , "3"));
+		statusList.add(new groupByEntityContainer(new groupByEntity("Kasavanahalli", "In Progress",null) , "1"));
+		statusList.add(new groupByEntityContainer(new groupByEntity("Junnasandra", "In Progress",null) , "1"));
+		statusList.add(new groupByEntityContainer(new groupByEntity("Junnasandra", "New",null) , "3"));
+		statusList.add(new groupByEntityContainer(new groupByEntity("Doddakanneli", "In Progress",null) , "1"));
+		statusList.add(new groupByEntityContainer(new groupByEntity("Doddakanneli", "In Progress",null) , "2"));
+		statusList.add(new groupByEntityContainer(new groupByEntity("Haralur", "In Progress",null) , "3"));
+		statusList.add(new groupByEntityContainer(new groupByEntity("Haralur", "New",null) , "1"));
+		statusList.add(new groupByEntityContainer(new groupByEntity("Kaikondrahalli", "In Progress",null) , "4"));
+		statusList.add(new groupByEntityContainer(new groupByEntity("Kaikondrahalli", "New",null) , "2"));
+		
+		snapshot.setBystatus(statusList);
+		
+		List<groupByEntityContainer> priorityList = new ArrayList<groupByEntityContainer>();
+		priorityList.add(new groupByEntityContainer(new groupByEntity("Kasavanahalli",null, "High") , "3"));
+		priorityList.add(new groupByEntityContainer(new groupByEntity("Kasavanahalli",null, "Meduim") , "1"));
+		priorityList.add(new groupByEntityContainer(new groupByEntity("Junnasandra",null, "Medium") , "1"));
+		priorityList.add(new groupByEntityContainer(new groupByEntity("Junnasandra", null,"Low") , "1"));
+		priorityList.add(new groupByEntityContainer(new groupByEntity("Junnasandra", null,"High") , "2"));
+		priorityList.add(new groupByEntityContainer(new groupByEntity("Doddakanneli",null, "High") , "1"));
+		priorityList.add(new groupByEntityContainer(new groupByEntity("Doddakanneli",null, "Low") , "2"));
+		priorityList.add(new groupByEntityContainer(new groupByEntity("Haralur",null, "Medium") , "3"));
+		priorityList.add(new groupByEntityContainer(new groupByEntity("Haralur", null,"High") , "1"));
+		priorityList.add(new groupByEntityContainer(new groupByEntity("Kaikondrahalli", null,"High") , "2"));
+		priorityList.add(new groupByEntityContainer(new groupByEntity("Kaikondrahalli",null, "Low") , "1"));
+		priorityList.add(new groupByEntityContainer(new groupByEntity("Kaikondrahalli",null, "Medium") , "1"));
+		
+		snapshot.setBypriority(priorityList);
+		
+		String serializied = new ObjectMapper().writeValueAsString(snapshot);
+		
+		System.out.println(serializied);
+		
+		/*RestAssured.baseURI = BASEURL;
+		RequestSpecification request = RestAssured.given();
+		request.header(new Header("content-type", "application/json"));
+		request.body(serializied);
+		
+		Response response = request.post("/roadstate/update");
+		
+		System.out.println(response.asString());
+		*/
+		
+	}
+	
 	
 	@Test
 	public void createRoadState() throws JsonProcessingException {

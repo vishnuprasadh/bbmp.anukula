@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import org.apache.tomcat.jni.Time;
 import org.hibernate.id.GUIDGenerator;
 import org.hibernate.id.UUIDGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.BulkOperations;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -32,7 +33,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cognitive.bbmp.anukula.configuration.MongoConfiguration;
 import com.cognitive.bbmp.anukula.domain.IssueHistory;
+import com.cognitive.bbmp.anukula.domain.IssueSnapshot;
 import com.cognitive.bbmp.anukula.domain.WardIssue;
+import com.cognitive.bbmp.anukula.repository.CustomWardIssueRepository;
 import com.fasterxml.jackson.databind.deser.DataFormatReaders.Match;
 import com.mongodb.AggregationOptions;
 import com.mongodb.BulkWriteOperation;
@@ -47,6 +50,9 @@ import com.mongodb.client.result.UpdateResult;
 @RequestMapping(value="/issues")
 public class WardIssueService {
 
+	@Autowired
+	CustomWardIssueRepository customWardRepo;
+	
 	MongoConfiguration config;
 	
 	@RequestMapping(value="/ward/{wardCode}", method=RequestMethod.GET)
@@ -260,6 +266,12 @@ public class WardIssueService {
 	}
 	
 	
+	@RequestMapping(value="/snapshot/{wardCode}")
+	public ResponseEntity<?> getIssueSnapshot(@PathVariable(name="wardCode") String wardCode)
+	{
+		List<IssueSnapshot> response = customWardRepo.getDashboardByWardForGivenWardWhereStatusNotEqual(wardCode, "Closed");
+		return new ResponseEntity<>(response,HttpStatus.OK);
+	}
 	
 	
 }
