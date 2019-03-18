@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.CriteriaDefinition;
@@ -23,8 +24,8 @@ import com.mongodb.client.MongoClient;
 import org.springframework.data.mongodb.core.query.Criteria;
 
 
-@SpringBootApplication(scanBasePackages= {"com.cognitive.bbmp.anukula"})
-@EnableAutoConfiguration(exclude= {DataSourceAutoConfiguration.class})
+@SpringBootApplication(scanBasePackages= {"com.cognitive.bbmp",""})
+@EnableAutoConfiguration(exclude= {DataSourceAutoConfiguration.class })
 public class Application {
 
 	

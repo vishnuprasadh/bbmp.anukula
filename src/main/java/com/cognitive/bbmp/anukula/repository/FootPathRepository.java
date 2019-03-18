@@ -5,7 +5,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 import com.cognitive.bbmp.anukula.domain.FootPaths;
 
-@EnableMongoRepositories
 public interface FootPathRepository extends MongoRepository<FootPaths, String> {
 
 }

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import com.cognitive.bbmp.anukula.domain.RoadState;
 
 
-@EnableMongoRepositories
 public interface RoadStateRespository extends MongoRepository<RoadState, String> {
 
 	

@@ -142,4 +142,8 @@ db.wardIssue.aggregate(
 
 
 
+mongo "mongodb+srv://cluster0-edgpx.mongodb.net/test"     --username bbmpanukula
+
+App connectionstring
+mongodb+srv://bbmpanukula:<bbmpanukula>@cluster0-edgpx.mongodb.net/test?retryWrites=true
 

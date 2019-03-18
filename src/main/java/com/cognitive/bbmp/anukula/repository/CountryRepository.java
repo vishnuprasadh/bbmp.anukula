@@ -10,7 +10,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.cognitive.bbmp.anukula.domain.Country;
 
-@EnableMongoRepositories
 public interface CountryRepository extends MongoRepository<Country, String>
 {
 	

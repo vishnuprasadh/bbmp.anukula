@@ -5,7 +5,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 import com.cognitive.bbmp.anukula.domain.Roads;
 
-@EnableMongoRepositories
 public interface RoadRepository extends MongoRepository<Roads, String> {
 
 }

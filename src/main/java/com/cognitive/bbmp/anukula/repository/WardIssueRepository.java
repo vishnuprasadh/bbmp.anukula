@@ -5,7 +5,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 import com.cognitive.bbmp.anukula.domain.WardIssue;
 
-@EnableMongoRepositories
 public interface WardIssueRepository extends MongoRepository<WardIssue, String> {
 
 }

@@ -12,6 +12,7 @@ import org.apache.tomcat.jni.Time;
 import org.hibernate.id.GUIDGenerator;
 import org.hibernate.id.UUIDGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.mongodb.core.BulkOperations;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -53,12 +54,13 @@ public class WardIssueService {
 	@Autowired
 	CustomWardIssueRepository customWardRepo;
 	
+	@Autowired
 	MongoConfiguration config;
 	
 	@RequestMapping(value="/ward/{wardCode}", method=RequestMethod.GET)
 	public ResponseEntity<?> getIssuesByWard(@PathVariable(value="wardCode") String wardCode)
 	{
-		config = new MongoConfiguration();
+		if (config ==null) config = new MongoConfiguration();
 		Query query = new Query();
 		query.addCriteria(Criteria.where("wardCode").is(wardCode));
 		
@@ -73,7 +75,7 @@ public class WardIssueService {
 	public ResponseEntity<?> getIssuesByWardandStatus(@PathVariable(value="wardCode") String wardCode, 
 			@PathVariable(value="status") String status)
 	{
-		config = new MongoConfiguration();
+		if (config ==null) config = new MongoConfiguration();
 		Query query = new Query();
 		query.addCriteria(Criteria.where("wardCode").is(wardCode).and("status").is(status));
 		
@@ -88,7 +90,7 @@ public class WardIssueService {
 	@RequestMapping(value="/history/{issueId}", method=RequestMethod.GET)
 	public ResponseEntity<?> getIssueHistoryByIssueId(@PathVariable(value="issueId") String issueId)
 	{
-		config = new MongoConfiguration();
+		if (config ==null) config = new MongoConfiguration();
 		
 		/*LookupOperation operation = LookupOperation.newLookup()
 				.from("wardIssue")
@@ -114,7 +116,7 @@ public class WardIssueService {
 	@RequestMapping(value="/bulkupdate", method=RequestMethod.POST)
 	public ResponseEntity<?> bulkUpdateIssues(@RequestBody List<WardIssue> issues)
 	{
-		config = new MongoConfiguration();
+		if (config ==null) config = new MongoConfiguration();
 		//DB dbBBMPAnukula = config.mongoClient().getDB("bbmpanukula");
 		
 		MongoOperations ops = config.mongoTemplate();
@@ -203,7 +205,7 @@ public class WardIssueService {
 	private long addNewIssueHistory(Query historyQuery, Query issueQuery, Update historyUpd, 
 			Update issueUpd, IssueHistory history)
 	{
-		config = new MongoConfiguration();
+		if (config ==null) config = new MongoConfiguration();
 		MongoOperations ops = config.mongoTemplate();
 		UpdateResult issueResult = ops.updateFirst(issueQuery, issueUpd, "wardIssue");
 		IssueHistory result = ops.insert(history, "issueHistory");
@@ -214,7 +216,7 @@ public class WardIssueService {
 	private long updateIssueHistory(Query historyQuery, Query issueQuery, Update historyUpd, 
 			Update issueUpd, IssueHistory history)
 	{
-		config = new MongoConfiguration();
+		if (config ==null) config = new MongoConfiguration();
 		MongoOperations ops = config.mongoTemplate();
 		UpdateResult historyResult = ops.upsert(historyQuery, historyUpd, "issueHistory");
 		UpdateResult issueResult = ops.upsert(issueQuery, issueUpd, "wardIssue");
@@ -226,7 +228,7 @@ public class WardIssueService {
 	@RequestMapping(value="/update",method=RequestMethod.POST)
 	public ResponseEntity<?> addNewIssue(@RequestBody WardIssue wardIssue )
 	{
-		config = new MongoConfiguration();
+		if (config ==null) config = new MongoConfiguration();
 		
 		Query query = new Query();
 		

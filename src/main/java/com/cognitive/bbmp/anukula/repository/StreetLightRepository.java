@@ -5,7 +5,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 import com.cognitive.bbmp.anukula.domain.StreetLights;
 
-@EnableMongoRepositories
 public interface StreetLightRepository extends MongoRepository<StreetLights, String> {
 
 }

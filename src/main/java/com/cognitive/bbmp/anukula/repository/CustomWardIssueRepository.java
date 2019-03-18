@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.bson.Document;
 import org.hibernate.criterion.AggregateProjection;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.mongodb.core.CollectionCallback;
@@ -43,9 +44,10 @@ import javassist.expr.NewArray;
 
 
 @Component
-@EnableMongoRepositories
 public class CustomWardIssueRepository implements CustomWardIssueDAL {
 
+	
+	
 	final String dashboardSQL = "db.wardIssue.aggregate(\n" + 
 								" $match:{status:{$ne:\"Closed\"}}\n" + 
 								" },\n" + 
@@ -62,9 +64,13 @@ public class CustomWardIssueRepository implements CustomWardIssueDAL {
 								"}}\n" + 
 								"]);";	
 	
+	
+	@Autowired
+	MongoConfiguration config ;
+	
 	@Override
 	public List<IssueSnapshot> getDashboardByWardForGivenWardWhereStatusNotEqual(String wardCode, String whereStatusNotIn) {
-		MongoConfiguration config = new MongoConfiguration();
+		if (config==null) config = new MongoConfiguration();
 		MongoOperations ops = config.mongoTemplate();
 		
 		/*BasicQuery query = new BasicQuery(dashboardSQL);

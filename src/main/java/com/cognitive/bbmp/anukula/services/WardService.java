@@ -2,6 +2,7 @@ package com.cognitive.bbmp.anukula.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -20,12 +21,13 @@ import com.cognitive.bbmp.anukula.domain.RoadColl;
 @RestController
 public class WardService {
 
-	MongoConfiguration config = null;
+	@Autowired
+	MongoConfiguration config ;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?>  getRoadByWardCode(@PathVariable(name="id")String wardCode)
 	{
-		config = new MongoConfiguration();
+		//config = new MongoConfiguration();
 		MongoOperations ops = config.mongoTemplate();
 		Query query = new Query();
 		query.addCriteria(Criteria.where("wardCode").is(wardCode));
