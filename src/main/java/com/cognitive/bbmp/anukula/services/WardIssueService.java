@@ -274,7 +274,7 @@ public class WardIssueService {
 			//upd.push("history",wardIssue.getHistory());
 			UpdateResult result = ops.upsert(query, upd, "wardIssue");
 			
-			logger.info(":Upsert: operation for :wardIssue: for IssueId:{} completed", wardIssue.getIssueId());
+			logger.info(":Upsert: operation for :wardIssue: for IssueId:{} completed with Id:{}", wardIssue.getIssueId());
 			
 			return new ResponseEntity<Long> (result.getMatchedCount(),HttpStatus.OK);
 		}
@@ -283,7 +283,7 @@ public class WardIssueService {
 			wardIssue.setDateUpdated( new Timestamp(new java.util.Date().getTime()).toString());
 			logger.info(":Insert: operation for :wardIssue: for IssueId:{} starting", wardIssue.getIssueId());
 			WardIssue result = ops.insert(wardIssue,"wardIssue");
-			logger.info(":Insert: operation for :wardIssue: for IssueId:{} completed", wardIssue.getIssueId());
+			logger.info(":Insert: operation for :wardIssue: for IssueId:{} completed with new Id:{}", wardIssue.getIssueId(), result.get_id());
 			
 			return new ResponseEntity<String>(result.get_id(),HttpStatus.OK);
 		}

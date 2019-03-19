@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.bson.Document;
 import org.hibernate.criterion.AggregateProjection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -31,6 +33,7 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 import com.cognitive.bbmp.anukula.configuration.MongoConfiguration;
 import com.cognitive.bbmp.anukula.domain.IssueSnapshot;
 import com.cognitive.bbmp.anukula.domain.WardIssue;
+import com.cognitive.bbmp.anukula.services.WardIssueService;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.MongoException;
@@ -46,6 +49,7 @@ import javassist.expr.NewArray;
 @Component
 public class CustomWardIssueRepository implements CustomWardIssueDAL {
 
+	private static final Logger logger = LoggerFactory.getLogger(CustomWardIssueRepository.class);
 	
 	
 	final String dashboardSQL = "db.wardIssue.aggregate(\n" + 
@@ -97,6 +101,7 @@ public class CustomWardIssueRepository implements CustomWardIssueDAL {
 						).as("bystatus");
 		*/
 		
+		logger.info("Aggregate for dashboard starting now for ward:{}",wardCode);
 		
 		AggregationResults<IssueSnapshot> snapshot = ops.aggregate (
 					newAggregation(
@@ -115,6 +120,7 @@ public class CustomWardIssueRepository implements CustomWardIssueDAL {
 					),  
 					"wardIssue",IssueSnapshot.class);
 		
+		logger.info("Aggregate for dashboard successfully completed for ward:{}",wardCode);
 		return snapshot.getMappedResults();
 		
 	}
