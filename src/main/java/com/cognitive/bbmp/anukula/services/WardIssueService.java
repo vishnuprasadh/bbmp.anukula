@@ -121,9 +121,12 @@ public class WardIssueService {
 		
 		MongoOperations ops = config.mongoTemplate();
 		
+		logger.info(":BulkUpdate: operation for :wardIssue: preparation");
+		
 		BulkOperations bulkOps = ops.bulkOps(BulkMode.ORDERED, "wardIssue");
 		
 		List<Pair<Query,Update>> upserts = new ArrayList<Pair<Query,Update>>();
+		
 		
 		for (WardIssue issue : issues)
 		{
@@ -144,10 +147,15 @@ public class WardIssueService {
 			
 			upserts.add(pair);
 		}
+		
+		logger.info(":BulkUpdate: operation for :wardIssue: before upsert");
+		
 		BulkWriteResult bulkResult = bulkOps.upsert(upserts).execute();
 		
 		int matchCount = bulkResult.getDeletedCount() + bulkResult.getInsertedCount()
 		+ bulkResult.getUpserts().size() + bulkResult.getModifiedCount();
+		
+		logger.info(":BulkUpdate: operation for :wardIssue: after upsert, committed {0} files.",matchCount);
 		
 		//int matchCount = bulkOps.insert(issues).execute().getMatchedCount();
 		
@@ -185,8 +193,11 @@ public class WardIssueService {
 			historyUpd.set("siteReport", history.getSiteReport());
 			historyUpd.set("statusComments", history.getStatusComments());
 			
+			logger.info(":Update: operation for :IssueHistory: before update for IssueId:{}", history.getIssueId());
 			
 			matchedCount= updateIssueHistory(historyQuery,issueQuery, historyUpd, issueUpd, history);
+			
+			logger.info(":Update: operation for :IssueHistory: after successful {} record update for IssueId:{}", matchedCount,history.getIssueId());
 	
 		}
 		//If we update by entering a new history or sitevisit along with status update
@@ -194,7 +205,10 @@ public class WardIssueService {
 		{
 			//MongoOperations ops = config.mongoTemplate();
 			history.setDateUpdated( new Timestamp(new java.util.Date().getTime()).toString());
+
+			logger.info(":Insert: operation for :IssueHistory: before insertion for IssueId:{}", history.getIssueId());
 			matchedCount= addNewIssueHistory(historyQuery, issueQuery, null, issueUpd, history);
+			logger.info(":Insert: operation for :IssueHistory: after successful {} record update for IssueId:{}", matchedCount,history.getIssueId());
 		}
 	
 		return new ResponseEntity<>(matchedCount, HttpStatus.OK);
@@ -207,6 +221,7 @@ public class WardIssueService {
 	{
 		if (config ==null) config = new MongoConfiguration();
 		MongoOperations ops = config.mongoTemplate();
+		
 		UpdateResult issueResult = ops.updateFirst(issueQuery, issueUpd, "wardIssue");
 		IssueHistory result = ops.insert(history, "issueHistory");
 		return issueResult.getMatchedCount();
@@ -253,16 +268,23 @@ public class WardIssueService {
 			upd.set("status", wardIssue.getStatus());
 			upd.set("priority",wardIssue.getPriority());
 			upd.set("dateUpdated", new Timestamp( new java.util.Date().getTime() ).toString() );
+			
+			logger.info(":Upsert: operation for :wardIssue: for IssueId:{} starting", wardIssue.getIssueId());
+			
 			//upd.push("history",wardIssue.getHistory());
 			UpdateResult result = ops.upsert(query, upd, "wardIssue");
+			
+			logger.info(":Upsert: operation for :wardIssue: for IssueId:{} completed", wardIssue.getIssueId());
 			
 			return new ResponseEntity<Long> (result.getMatchedCount(),HttpStatus.OK);
 		}
 		else
 		{
 			wardIssue.setDateUpdated( new Timestamp(new java.util.Date().getTime()).toString());
-			
+			logger.info(":Insert: operation for :wardIssue: for IssueId:{} starting", wardIssue.getIssueId());
 			WardIssue result = ops.insert(wardIssue,"wardIssue");
+			logger.info(":Insert: operation for :wardIssue: for IssueId:{} completed", wardIssue.getIssueId());
+			
 			return new ResponseEntity<String>(result.get_id(),HttpStatus.OK);
 		}
 	}
@@ -271,7 +293,9 @@ public class WardIssueService {
 	@RequestMapping(value="/snapshot/{wardCode}")
 	public ResponseEntity<?> getIssueSnapshot(@PathVariable(name="wardCode") String wardCode)
 	{
+		logger.info(":Get: :Snapshot: operation for :wardIssue: for wardCode:{} starting", wardCode);
 		List<IssueSnapshot> response = customWardRepo.getDashboardByWardForGivenWardWhereStatusNotEqual(wardCode, "Closed");
+		logger.info(":Get: :Snapshot: operation for :wardIssue: for wardCode:{} completed", wardCode);
 		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
 	
