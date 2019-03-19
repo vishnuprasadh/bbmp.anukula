@@ -4,21 +4,16 @@ package com.cognitive.bbmp.anukula.services;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-
 import javax.transaction.Transactional;
 
-import org.apache.tomcat.jni.Time;
-import org.hibernate.id.GUIDGenerator;
-import org.hibernate.id.UUIDGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Import;
 import org.springframework.data.mongodb.core.BulkOperations;
+import org.springframework.data.mongodb.core.BulkOperations.BulkMode;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.BulkOperations.BulkMode;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.LookupOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.query.Query;
@@ -37,20 +32,15 @@ import com.cognitive.bbmp.anukula.domain.IssueHistory;
 import com.cognitive.bbmp.anukula.domain.IssueSnapshot;
 import com.cognitive.bbmp.anukula.domain.WardIssue;
 import com.cognitive.bbmp.anukula.repository.CustomWardIssueRepository;
-import com.fasterxml.jackson.databind.deser.DataFormatReaders.Match;
-import com.mongodb.AggregationOptions;
-import com.mongodb.BulkWriteOperation;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
 import com.mongodb.bulk.BulkWriteResult;
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.result.UpdateResult;
-
 
 @RestController
 @RequestMapping(value="/issues")
 public class WardIssueService {
 
+	private static final Logger logger = LoggerFactory.getLogger(WardIssueService.class);
+	
 	@Autowired
 	CustomWardIssueRepository customWardRepo;
 	
@@ -66,7 +56,12 @@ public class WardIssueService {
 		
 		MongoOperations ops = config.mongoTemplate();
 		
+		logger.info(":Get: operation for :wardIssue: for ward:{} starting.",wardCode);
+		
 		List<WardIssue> issues = ops.find(query, WardIssue.class);
+		
+		logger.info(":Get: operation for :wardIssue: for ward:{} starting.",wardCode);
+		
 		
 		return new ResponseEntity<List<WardIssue>>(issues,HttpStatus.OK);
 	}
@@ -81,7 +76,10 @@ public class WardIssueService {
 		
 		MongoOperations ops = config.mongoTemplate();
 		
+		logger.info(":Get: operation for :wardIssue: for ward:{} with status {} starting.",wardCode,status);
+		
 		List<WardIssue> issues = ops.find(query, WardIssue.class);
+		logger.info(":Get: operation for :wardIssue: for ward:{} with status {} completed.",wardCode,status);
 		
 		return new ResponseEntity<List<WardIssue>>(issues, HttpStatus.OK);
 		
@@ -107,7 +105,9 @@ public class WardIssueService {
 		
 		MongoOperations ops = config.mongoTemplate();
 		
+		logger.info(":Get: operation for :IssueHistory: for IssueId:{} starterd.",issueId);
 		List<IssueHistory> history = ops.find(query, IssueHistory.class);
+		logger.info(":Get: operation for :IssueHistory: for IssueId:{} completed.",issueId);
 		
 		return new ResponseEntity<List<IssueHistory>>(history, HttpStatus.OK);
 		
