@@ -289,7 +289,8 @@ db.zones.insert(
     "unit": "sqkm",
     "wards": [
       {
-        "wardCode": "150",
+        "wardId": "150",
+        "wardCode":"BELL",
         "wardName": "Bellandur",
         "population": 200000,
         "area": "26.4",

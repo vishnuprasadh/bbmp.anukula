@@ -11,10 +11,11 @@ public class Ward implements Serializable{
 	
 	public Ward() {}
 	
-	public Ward(String wardCode,
+	public Ward(String wardCode, String wardId,
 			String wardName, String area ,long population, String unit)
 	{
 		this.area = area;
+		this.wardId = wardId;
 		this.unit = unit;
 		this.wardName = wardName;
 		this.wardCode = wardCode;
@@ -56,6 +57,16 @@ public class Ward implements Serializable{
 	private long population;
 	private String area;
 	private String unit;
+	
+	private String wardId;
+	public String getWardId() {
+		return wardId;
+	}
+
+	public void setWardId(String wardId) {
+		this.wardId = wardId;
+	}
+	
 	
 
 }
