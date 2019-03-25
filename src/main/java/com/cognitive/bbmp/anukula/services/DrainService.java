@@ -3,6 +3,7 @@ package com.cognitive.bbmp.anukula.services;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -25,12 +26,13 @@ import com.mongodb.client.result.UpdateResult;
 @RequestMapping("/drains")
 public class DrainService {
 	
+	@Autowired 
 	MongoConfiguration config ;
 	
 	@RequestMapping(name="/update",method=RequestMethod.POST)
 	public ResponseEntity<?> updateDrain(@RequestBody Drains drains)
 	{
-		config = new MongoConfiguration();
+		//config = new MongoConfiguration();
 		MongoOperations ops = config.mongoTemplate();
 		if (drains.get_id()!=null)
 		{
@@ -68,7 +70,7 @@ public class DrainService {
 	@RequestMapping("/id/{id}")
 	public ResponseEntity<?> getDrainByIdentifier(@PathVariable(name="id") String id)
 	{
-		config = new MongoConfiguration();
+		//config = new MongoConfiguration();
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(id) );
 		
@@ -83,7 +85,7 @@ public class DrainService {
 	@RequestMapping("/roadid/{id}")
 	public ResponseEntity<?> getDrainByRoadId(@PathVariable(name="id") String id)
 	{
-		config = new MongoConfiguration();
+		//config = new MongoConfiguration();
 		Query query = new Query();
 		query.addCriteria(Criteria.where("roadid").is(id) );
 		

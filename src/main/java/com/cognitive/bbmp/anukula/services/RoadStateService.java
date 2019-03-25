@@ -3,6 +3,7 @@ package com.cognitive.bbmp.anukula.services;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -25,12 +26,13 @@ import com.mongodb.client.result.UpdateResult;
 @RequestMapping("/roadstate")
 public class RoadStateService {
 
+	@Autowired
 	MongoConfiguration config ;
 	
 	@RequestMapping(name="/update",method=RequestMethod.POST)
 	public ResponseEntity<?> updateRoadState(@RequestBody RoadState roadstate)
 	{
-		config = new MongoConfiguration();
+		//config = new MongoConfiguration();
 		MongoOperations ops = config.mongoTemplate();
 		if (roadstate.get_id()!=null)
 		{
@@ -66,7 +68,7 @@ public class RoadStateService {
 	@RequestMapping("/id/{id}")
 	public ResponseEntity<?> getRoadStateByIdentifier(@PathVariable(name="id") String id)
 	{
-		config = new MongoConfiguration();
+		//config = new MongoConfiguration();
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(id) );
 		
@@ -81,7 +83,7 @@ public class RoadStateService {
 	@RequestMapping("/roadid/{id}")
 	public ResponseEntity<?> getRoadStateByRoadId(@PathVariable(name="id") String id)
 	{
-		config = new MongoConfiguration();
+		//config = new MongoConfiguration();
 		Query query = new Query();
 		query.addCriteria(Criteria.where("roadid").is(id) );
 		

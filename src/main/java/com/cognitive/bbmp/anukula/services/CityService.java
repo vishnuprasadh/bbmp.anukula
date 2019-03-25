@@ -2,6 +2,7 @@ package com.cognitive.bbmp.anukula.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -22,8 +23,8 @@ import com.cognitive.bbmp.anukula.domain.State;
 @RequestMapping("/city")
 public class CityService {
 	
-	
-	MongoConfiguration config = null;
+	@Autowired
+	MongoConfiguration config;
 	
 	@RequestMapping(value="/create",method=RequestMethod.POST)
 	public String addCity()
@@ -34,7 +35,6 @@ public class CityService {
 	@RequestMapping(value="/get",method=RequestMethod.GET)
 	public ResponseEntity<?>  getAllCities()
 	{
-		config =new MongoConfiguration();
 		MongoOperations ops = config.mongoTemplate();
 		List<Country> country = ops.findAll(Country.class);
 		
@@ -45,7 +45,6 @@ public class CityService {
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public ResponseEntity<?>  getCities(@PathVariable(name="id") String cityCode)
 	{
-		config =new MongoConfiguration();
 		MongoOperations ops = config.mongoTemplate();
 		Query query = new Query();
 		query.addCriteria(Criteria.where("states.cities.cityCode").is(cityCode));
@@ -59,7 +58,6 @@ public class CityService {
 	public ResponseEntity<?>  getWardByCityCode(@PathVariable(name="citycode") String cityCode,
 			@PathVariable(name="wardCode") String wardCode)
 	{
-		config =new MongoConfiguration();
 		MongoOperations ops = config.mongoTemplate();
 		Query query = new Query();
 		query.addCriteria(Criteria.where("states.cities.cityCode").is(cityCode));

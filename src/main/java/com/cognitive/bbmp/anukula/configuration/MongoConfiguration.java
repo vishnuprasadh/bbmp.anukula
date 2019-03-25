@@ -2,6 +2,7 @@ package com.cognitive.bbmp.anukula.configuration;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.bson.Document;
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.MongoTransactionManager;
@@ -32,7 +34,6 @@ import com.mongodb.client.MongoDatabase;
 import com.cognitive.bbmp.anukula.domain.Roads;
 import com.mongodb.MongoClient;
 
-@Component
 @Configuration
 @EnableMongoRepositories(basePackages="com.cognitive.bbmp.anukula")
 public class MongoConfiguration extends AbstractMongoConfiguration
@@ -49,7 +50,9 @@ public class MongoConfiguration extends AbstractMongoConfiguration
 	ApplicationContext context;
 	
 	@Autowired
-	Environment env;
+	private Environment env;
+	
+	String activeProfile;
 	
 	@Override
 	public String getDatabaseName()
@@ -58,13 +61,16 @@ public class MongoConfiguration extends AbstractMongoConfiguration
 		return "bbmpanukula";
 	}
 	
+	@PostConstruct
+	public void Init() {
+		//this.env =env.getActiveProfiles()[0];
+		activeProfile = env.getActiveProfiles()[0];
+	}
 	
 	@Bean
 	@Override
 	public MongoClient mongoClient()
 	{
-		String activeProfile = env.getActiveProfiles()[0];
-		
 		if(activeProfile.toLowerCase().equals("production"))
 		{
 			if (appHosting==null)
@@ -79,7 +85,8 @@ public class MongoConfiguration extends AbstractMongoConfiguration
 		}
 		else
 		{
-			MongoClient client = new MongoClient(appHosting);
+			//MongoClientURI uri = new MongoClientURI(appHosting);
+			MongoClient client = new MongoClient(appHosting, 27017);
 			MongoDatabase db = client.getDatabase("bbmpanukula");
 			return client;
 		}

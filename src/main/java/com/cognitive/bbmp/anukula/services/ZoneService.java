@@ -31,8 +31,8 @@ import com.cognitive.bbmp.anukula.repository.RoadStateRespository;
 @RequestMapping(value="/zones")
 public class ZoneService
 {
-	
-	MongoConfiguration config = new MongoConfiguration() ;
+	@Autowired
+	MongoConfiguration config  ;
 	
 	@Autowired
 	CustomRoadDAL customRoadbyZone;
@@ -42,7 +42,6 @@ public class ZoneService
 	{
 		
 		MongoOperations ops = config.mongoTemplate();
-		
 		Query query = new Query();
 		query = AddQueryCondition(query, "cityCode", cityCode);
 		

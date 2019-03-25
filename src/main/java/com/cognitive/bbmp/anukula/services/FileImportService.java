@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -24,6 +25,7 @@ import com.mongodb.client.result.UpdateResult;
 @RequestMapping("/processCSVFile")
 public class FileImportService {
 
+	@Autowired
 	MongoConfiguration config ;
 
 	@RequestMapping(value="/update", method=RequestMethod.POST)
@@ -99,7 +101,7 @@ public class FileImportService {
 		if (status !=null)
 			query.addCriteria(Criteria.where("status").is(status));
 		
-		config = new MongoConfiguration();
+		//config = new MongoConfiguration();
 		MongoOperations ops = config.mongoTemplate();
 		
 		List<FileFormat> fileList = ops.findAll(FileFormat.class, "fileProcess");

@@ -3,6 +3,7 @@ package com.cognitive.bbmp.anukula.services;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -25,13 +26,13 @@ import com.mongodb.client.result.UpdateResult;
 @RequestMapping("/footpaths")
 public class FootPathService {
 	
-	
+	@Autowired
 	MongoConfiguration config ;
 	
 	@RequestMapping(name="/update",method=RequestMethod.POST)
 	public ResponseEntity<?> updateFootPath(@RequestBody FootPaths footpaths)
 	{
-		config = new MongoConfiguration();
+		//config = new MongoConfiguration();
 		MongoOperations ops = config.mongoTemplate();
 		if (footpaths.get_id()!=null)
 		{
@@ -69,7 +70,7 @@ public class FootPathService {
 	@RequestMapping("/id/{id}")
 	public ResponseEntity<?> getFootPathByIdentifier(@PathVariable(name="id") String id)
 	{
-		config = new MongoConfiguration();
+		//config = new MongoConfiguration();
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(id) );
 		
@@ -84,7 +85,7 @@ public class FootPathService {
 	@RequestMapping("/roadid/{id}")
 	public ResponseEntity<?> getFootPathtByRoadId(@PathVariable(name="id") String id)
 	{
-		config = new MongoConfiguration();
+		//config = new MongoConfiguration();
 		Query query = new Query();
 		query.addCriteria(Criteria.where("roadid").is(id) );
 		

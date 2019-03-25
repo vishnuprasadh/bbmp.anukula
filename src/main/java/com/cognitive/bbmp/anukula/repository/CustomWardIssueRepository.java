@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.mongodb.core.CollectionCallback;
+import org.springframework.data.mongodb.core.CollectionOptions;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
@@ -20,6 +21,7 @@ import org.springframework.data.mongodb.core.aggregation.UnwindOperation;
 import org.springframework.data.mongodb.core.aggregation.FacetOperation.FacetOperationBuilder;
 import org.springframework.data.mongodb.core.aggregation.Field;
 import org.springframework.data.mongodb.core.query.BasicQuery;
+import org.springframework.data.mongodb.core.query.Collation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.query.Query;
@@ -103,10 +105,11 @@ public class CustomWardIssueRepository implements CustomWardIssueDAL {
 		
 		logger.info("Aggregate for dashboard starting now for ward:{}",wardCode);
 		
-		AggregationResults<IssueSnapshot> snapshot = ops.aggregate (
+			
+		//ops = ops.createCollection(IssueSnapshot.class,CollectionOptions.ValidationOptions.  )
+		AggregationResults<IssueSnapshot> snapshot = ops.aggregate(
 					newAggregation(
 					match(Criteria.where("status").ne(whereStatusNotIn).and("wardCode").is(wardCode)),
-							
 					facet(
 					unwind("location"),
 					sortByCount("location"))
