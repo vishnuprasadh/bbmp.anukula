@@ -27,7 +27,7 @@ public class AllowCrossOriginFilter implements Filter{
 		
 		HttpServletResponse res = (HttpServletResponse) response;
 		res.addHeader("Access-Control-Allow-Origin", "*");
-		res.addHeader("Content-Type", "application/json");
+		res.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
 		chain.doFilter(request, res);
 	}
 
