@@ -47,6 +47,8 @@ public class ZoneService
 		
 		List<Zone> zones = ops.find(query, Zone.class);
 		
+		
+		
 		return new ResponseEntity<List<Zone>>(zones, HttpStatus.OK);
 		
 	}
